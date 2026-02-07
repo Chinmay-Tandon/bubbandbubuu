@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Muskan ❤️</title>
+
+<style>
+body {
+    background: linear-gradient(to bottom, #000000, #1a001a);
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #ff4da6;
+}
+
+.puzzle {
+    margin: 40px 0;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+}
+
+button {
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    background: #ff4da6;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 18px;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #ff1a8c;
+}
+
+.locked-word {
+    font-size: 22px;
+    margin-top: 10px;
+    color: #ff99cc;
+}
+
+#finalBox {
+    display: none;
+    margin-top: 40px;
+}
+
+#proposal {
+    display: none;
+    margin-top: 40px;
+    font-size: 32px;
+    color: #ff66b2;
+}
+
+/* Button alignment */
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.yesBtn {
+    font-size: 20px;
+}
+
+.noBtn {
+    font-size: 18px;
+}
+</style>
+</head>
+<body>
+
+<h1>Hey Muskan ❤️</h1>
+<p>Solve these little pieces of our story...</p>
+
+<div class="puzzle">
+<h3>Puzzle 1</h3>
+<p>
+The place where two strangers met,<br>
+And time quietly paused for a bet.<br>
+Coffee grew cold, but hearts grew warm.<br>
+Where was it that love took form?
+</p>
+<input type="text" id="p1">
+<button onclick="checkP1()">Unlock</button>
+<div class="locked-word" id="word1"></div>
+</div>
+
+<div class="puzzle">
+<h3>Puzzle 2</h3>
+<p>What is the name you call me when you’re soft and sleepy?</p>
+<input type="text" id="p2">
+<button onclick="checkP2()">Unlock</button>
+<div class="locked-word" id="word2"></div>
+</div>
+
+<div class="puzzle">
+<h3>Puzzle 3</h3>
+<p>Decode this (Shift each letter back by one):<br><b>NBSSZ</b></p>
+<input type="text" id="p3">
+<button onclick="checkP3()">Unlock</button>
+<div class="locked-word" id="word3"></div>
+</div>
+
+<div class="puzzle">
+<h3>Puzzle 4</h3>
+<p>13 - 5 (A=1, B=2...)</p>
+<input type="text" id="p4">
+<button onclick="checkP4()">Unlock</button>
+<div class="locked-word" id="word4"></div>
+</div>
+
+<div id="finalBox">
+<h2>Now enter all unlocked words in order:</h2>
+<input type="text" id="finalAnswer" placeholder="Type the full sentence">
+<br>
+<button onclick="checkFinal()">Reveal</button>
+</div>
+
+<div id="proposal">
+    <p>Will You Marry Me?</p>
+
+    <div class="buttonContainer">
+        <button class="yesBtn"
+        onclick="alert('You just made me the happiest person alive ❤️')">
+        Yes 💖
+        </button>
+
+        <button class="noBtn" id="noBtn">
+        Let me think 💔
+        </button>
+    </div>
+</div>
+
+<script>
+
+let solved = {p1:false,p2:false,p3:false,p4:false};
+
+function checkP1(){
+    if(!solved.p1 && document.getElementById("p1").value.toLowerCase().trim() === "social"){
+        document.getElementById("word1").innerHTML = "WILL";
+        solved.p1 = true;
+        showFinal();
+    }
+}
+
+function checkP2(){
+    if(!solved.p2 && document.getElementById("p2").value.toLowerCase().trim() === "booboo"){
+        document.getElementById("word2").innerHTML = "YOU";
+        solved.p2 = true;
+        showFinal();
+    }
+}
+
+function checkP3(){
+    if(!solved.p3 && document.getElementById("p3").value.toLowerCase().trim() === "marry"){
+        document.getElementById("word3").innerHTML = "MARRY";
+        solved.p3 = true;
+        showFinal();
+    }
+}
+
+function checkP4(){
+    if(!solved.p4 && document.getElementById("p4").value.toLowerCase().trim() === "me"){
+        document.getElementById("word4").innerHTML = "ME ?";
+        solved.p4 = true;
+        showFinal();
+    }
+}
+
+function showFinal(){
+    if(solved.p1 && solved.p2 && solved.p3 && solved.p4){
+        document.getElementById("finalBox").style.display = "block";
+    }
+}
+
+function checkFinal(){
+    let answer = document.getElementById("finalAnswer").value.toLowerCase().trim();
+    if(answer === "will you marry me"){
+        document.getElementById("proposal").style.display = "block";
+    } else {
+        alert("Look carefully at the unlocked words ❤️");
+    }
+}
+
+/* SHRINK BUTTON LOGIC */
+let noBtn = document.getElementById("noBtn");
+let shrinkCount = 0;
+
+noBtn.addEventListener("click", function(){
+
+    shrinkCount++;
+
+    let scale = 1 - (shrinkCount * 0.2);
+
+    if(scale <= 0.2){
+        noBtn.style.display = "none";
+    } else {
+        noBtn.style.transform = "scale(" + scale + ")";
+    }
+
+});
+
+</script>
+
+</body>
+</html>
