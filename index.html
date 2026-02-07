@@ -111,6 +111,12 @@ body > * {
 </head>
 <body>
 
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="beginning-middle-end.mp3" type="audio/mpeg">
+</audio>
+
+
 <h1>Hey Muskan ❤️</h1>
 <p>Solve these little pieces of our story...</p>
 
@@ -174,6 +180,13 @@ Where was it that love took form?
 </div>
 
 <script>
+// Enable music after first interaction
+document.addEventListener("click", function() {
+    const music = document.getElementById("bgMusic");
+    if (music.paused) {
+        music.play().catch(() => {});
+    }
+}, { once: true });
 
 let solved = {p1:false,p2:false,p3:false,p4:false};
 
