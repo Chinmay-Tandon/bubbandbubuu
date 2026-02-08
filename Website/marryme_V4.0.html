@@ -342,7 +342,7 @@ function checkP4(){
 
         if(dumbAttempts === 1){
             alert("Only a dumb person can get that wrong 😌");
-        } else if(dumbAttempts === 2){
+        } else if(dumbAttempts >= 2){
             alert("Are you dumb? 😏");
         }
     }
@@ -351,7 +351,7 @@ function checkP4(){
 function checkP5(){
     let answer = document.getElementById("p5").value.trim();
 
-    if(!solved.p5 && answer === "05012026"){
+    if(!solved.p5 && answer === "03012026"){
         document.getElementById("word5").innerHTML = "FOREVER";
         solved.p5 = true;
         showFinal();
