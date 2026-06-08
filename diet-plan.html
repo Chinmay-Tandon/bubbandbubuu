@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>7-Day Diet Plan ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#FAF8F5;--card:#FFFFFF;--plum:#3B0764;--violet:#7C3AED;--lilac:#A78BFA;
+  --rose:#F43F5E;--pink:#EC4899;--fuchsia:#C026D3;--emerald:#059669;
+  --amber:#D97706;--sky:#0284C7;--text:#1C1B2E;--mid:#4B4563;--light:#9CA3AF;
+  --border:#F0EDF9;--shadow:rgba(109,40,217,0.09);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;font-size:15px;-webkit-font-smoothing:antialiased;height:100%}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#3B0764 0%,#6D28D9 45%,#BE185D 100%);padding:26px 20px 22px;color:#fff;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;opacity:.04;background-image:radial-gradient(circle at 25% 35%,#fff 1px,transparent 1px),radial-gradient(circle at 75% 65%,#fff 1px,transparent 1px);background-size:28px 28px}
+.hero-eye{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:5px}
+.hero-title{font-family:'Playfair Display',serif;font-size:25px;font-weight:700;line-height:1.2;margin-bottom:5px}
+.hero-desc{font-size:11.5px;color:rgba(255,255,255,.72);margin-bottom:14px;line-height:1.5}
+.hero-badges{display:flex;flex-wrap:wrap;gap:6px}
+.hbadge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:4px 11px;font-size:10.5px;font-weight:700;backdrop-filter:blur(6px)}
+
+/* TAB BAR */
+.tabs{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #EDE9FE;display:flex;overflow-x:auto;scrollbar-width:none;box-shadow:0 2px 12px rgba(109,40,217,.08)}
+.tabs::-webkit-scrollbar{display:none}
+.tb{padding:12px 15px;font-size:12.5px;font-family:'Nunito',sans-serif;font-weight:700;color:var(--light);background:none;border:none;border-bottom:2.5px solid transparent;white-space:nowrap;cursor:pointer;transition:all .18s}
+.tb.on{color:var(--violet);border-bottom-color:var(--violet)}
+
+/* LAYOUT */
+.panels{padding:14px 14px 60px;max-width:480px;margin:0 auto}
+.panel{display:none}.panel.on{display:block;animation:fadeUp .22s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.stack>*+*{margin-top:12px}
+
+/* CARDS */
+.card{background:var(--card);border-radius:18px;padding:16px;box-shadow:0 2px 14px var(--shadow)}
+.ctitle{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--violet);margin-bottom:10px}
+.csub{font-size:11px;color:var(--light);margin-top:-6px;margin-bottom:10px;line-height:1.55}
+.sechead{font-size:12.5px;font-weight:800;margin:14px 0 8px}
+
+/* TILES */
+.t4{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:10px}
+.t2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{border-radius:12px;padding:9px 6px;text-align:center}
+.tl{font-size:9px;color:var(--light);font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.tv{font-size:13px;font-weight:800;line-height:1.3;margin-top:2px}
+.tsub{font-size:10px;color:var(--light);margin-top:2px}
+.tile.big .tv{font-size:20px}
+.tile.big{padding:12px 10px}
+.tv-plum{color:var(--violet)}.tv-fuch{color:var(--fuchsia)}.tv-amb{color:var(--amber)}.tv-sky{color:var(--sky)}.tv-em{color:var(--emerald)}
+
+/* PROGRESS */
+.prow{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.plbl{font-size:10px;color:var(--light);font-weight:700;width:38px;flex-shrink:0}
+.ptrack{flex:1;height:5px;background:#EDE9FE;border-radius:10px;overflow:hidden}
+.pfill{height:100%;border-radius:10px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.pnums{font-size:9px;color:var(--light);white-space:nowrap;width:52px;text-align:right;flex-shrink:0}
+
+/* DAY PICKER */
+.daypick{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.daypick::-webkit-scrollbar{display:none}
+.daybtn{display:flex;flex-direction:column;align-items:center;min-width:50px;border-radius:16px;padding:8px 10px;background:#fff;border:1.5px solid #EDE9FE;cursor:pointer;transition:all .2s;font-family:'Nunito',sans-serif}
+.daybtn.on{background:var(--violet);border-color:var(--violet);color:#fff;box-shadow:0 4px 14px rgba(124,58,237,.35);transform:translateY(-1px)}
+.de{font-size:17px}.ds{font-size:10px;font-weight:800;margin-top:2px}
+
+/* MEAL CARDS */
+.mcard{background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);overflow:hidden;margin-bottom:10px}
+.mhdr{display:flex;align-items:center;gap:11px;padding:13px 15px;cursor:pointer;background:none;border:none;width:100%;text-align:left;font-family:'Nunito',sans-serif}
+.mtime{background:#EDE9FE;border-radius:10px;padding:5px 7px;min-width:62px;text-align:center}
+.mtxt{font-size:10px;font-weight:700;color:var(--violet)}
+.minfo{flex:1;min-width:0}
+.mtype{font-size:9px;color:var(--light);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.mname{font-size:13px;font-weight:700;color:var(--text);line-height:1.3;margin-top:2px}
+.mmacros{text-align:right;flex-shrink:0}
+.mkcal{font-size:11px;font-weight:800;color:var(--violet)}
+.mprot{font-size:10px;color:var(--fuchsia);font-weight:600}
+.mchev{font-size:9px;color:var(--light);margin-top:2px}
+.mbody{display:none;padding:12px 15px 14px;background:#F9F7FF;border-top:1px solid #EDE9FE;font-size:12px;color:var(--mid);line-height:1.7}
+
+/* ITEM CARDS */
+.ic{border-radius:13px;padding:11px;margin-bottom:7px;border-width:1px;border-style:solid}
+.in{font-size:12.5px;font-weight:700;margin-bottom:3px}
+.id{font-size:11px;line-height:1.55;color:var(--mid)}
+.em{background:#F0FDF4;border-color:#BBF7D0}.em .in{color:#065F46}
+.vi{background:#F5F3FF;border-color:#DDD6FE}.vi .in{color:#5B21B6}
+.ro{background:#FFF1F2;border-color:#FECDD3}.ro .in{color:#BE123C}
+.am{background:#FFFBEB;border-color:#FDE68A}.am .in{color:#92400E}
+.sk{background:#F0F9FF;border-color:#BAE6FD}.sk .in{color:#0C4A6E}
+.or{background:#FFF7ED;border-color:#FED7AA}.or .in{color:#9A3412}
+.pk{background:#FDF2F8;border-color:#FBCFE8}.pk .in{color:#9D174D}
+.gy{background:#FAFAFA;border-color:#E5E7EB}.gy .in{color:#1F2937}
+.re{background:#FFF1F2;border-color:#FECDD3}
+
+/* SEV */
+.sbadge{font-size:9px;font-weight:800;padding:2px 7px;border-radius:100px;letter-spacing:.3px;flex-shrink:0}
+.sH{background:#FECDD3;color:#9F1239}.sM{background:#FDE68A;color:#92400E}.sL{background:#BAE6FD;color:#0C4A6E}
+.scH{background:#FFF1F2;border-color:#FECDD3}.scM{background:#FFFBEB;border-color:#FDE68A}.scL{background:#F0F9FF;border-color:#BAE6FD}
+.sev-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px}
+
+/* ROWS & STEPS */
+.rrow{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;background:#FAFAFA;border-radius:12px;padding:11px;margin-bottom:7px}
+.rl{font-size:12.5px;font-weight:600}.rn{font-size:11px;color:var(--light);margin-top:2px}
+.rv{font-size:13px;font-weight:800;color:var(--violet);white-space:nowrap}
+.step{display:flex;gap:11px;background:#FAFAFA;border-radius:13px;padding:11px;margin-bottom:7px;align-items:flex-start}
+.snum{background:var(--violet);color:#fff;border-radius:50%;width:27px;height:27px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+.stit{font-size:12.5px;font-weight:700}.sdet{font-size:11px;color:var(--mid);margin-top:3px;line-height:1.55}
+
+/* SNACK ROWS */
+.snrow{display:flex;gap:11px;background:#FAFAFA;border-radius:13px;padding:11px;margin-bottom:7px}
+.sninfo{flex:1}.snn{font-size:12.5px;font-weight:700}.snd{font-size:11px;color:var(--light);margin-top:2px;line-height:1.45}
+.snm{text-align:right;flex-shrink:0;min-width:62px}.snk{font-size:11px;font-weight:800;color:var(--violet)}.snp{font-size:10px;color:var(--fuchsia);font-weight:600}
+
+/* EATING OUT */
+.ecard{background:#FAFAFA;border-radius:13px;padding:11px;margin-bottom:7px}
+.en{font-size:12.5px;font-weight:700;margin-bottom:3px}.eok{font-size:11px;color:var(--mid);line-height:1.5;margin-bottom:2px}.eav{font-size:11px;color:#E11D48;line-height:1.5}
+
+/* GRAIN */
+.gcard{background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px;padding:13px;margin-bottom:9px}
+.ghdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.gname{font-size:14px;font-weight:700}
+.gstats{display:grid;grid-template-columns:1fr 1fr;gap:3px;font-size:11px;color:var(--light);margin-bottom:5px}
+.gnote{font-size:11px;color:var(--mid);line-height:1.55}
+.gwhen{font-size:11px;color:var(--violet);font-weight:700;margin-top:6px}
+
+/* GROCERY */
+.gcat{font-size:12.5px;font-weight:800;color:var(--text);margin:14px 0 7px}
+.gitem{display:flex;gap:7px;font-size:12px;color:var(--mid);margin-bottom:5px;line-height:1.45}
+.gdot{color:var(--lilac);flex-shrink:0}
+
+/* SOYA STEPS */
+.sstep{display:flex;gap:9px;background:#F0FDF4;border-radius:12px;padding:10px;margin-bottom:7px;align-items:flex-start}
+.ssnum{background:#059669;color:#fff;border-radius:50%;width:23px;height:23px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+.sstxt{font-size:11px;color:var(--mid);line-height:1.6}
+
+/* SUPP */
+.supp{border-radius:13px;padding:11px;margin-bottom:7px}
+.supp-am{background:#FFFBEB;border:1px solid #FDE68A}.supp-am .sn{color:var(--amber)}
+.supp-ni{background:#EEF2FF;border:1px solid #C7D2FE}.supp-ni .sn{color:#3730A3}
+.sn{font-size:12.5px;font-weight:700;margin-bottom:3px}.sd{font-size:11px;color:var(--mid);line-height:1.55}
+
+/* GRADIENT BG CARD */
+.gcrd{background:linear-gradient(135deg,#F5F3FF,#FDF2F8);border-radius:18px;padding:16px}
+.gcrd .ctitle{color:var(--violet)}
+.tm-row{display:flex;gap:8px;margin-bottom:6px;align-items:flex-start}
+.tm-lbl{font-size:11px;font-weight:800;flex-shrink:0}
+
+/* POLICY */
+.pol-strict{background:#FFF1F2;border:1px solid #FECDD3;border-radius:14px;padding:12px;margin-bottom:8px}
+.pol-sust{background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px;padding:12px}
+.pol-head{font-size:12.5px;font-weight:800;margin-bottom:6px}
+.pol-item{font-size:11.5px;color:var(--mid);margin-bottom:4px}
+
+/* TAG PILL */
+.tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:100px}
+
+/* SAFE AREA */
+@supports(padding:env(safe-area-inset-bottom)){.panels{padding-bottom:calc(60px + env(safe-area-inset-bottom))}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="hero-eye">Personalised Plan</p>
+  <h1 class="hero-title">7-Day Fat Loss Diet ✨</h1>
+  <p class="hero-desc">Vegetarian + Eggs · Mounjaro 7.5mg · Low-Carb, Grain-Minimal, High-Protein</p>
+  <div class="hero-badges">
+    <span class="hbadge">1,500–1,700 kcal</span>
+    <span class="hbadge">120–140g protein</span>
+    <span class="hbadge">30–40g fiber</span>
+    <span class="hbadge">2.5–3L water</span>
+  </div>
+</div>
+
+<nav class="tabs" id="tabBar">
+  <button class="tb on" data-tab="overview" onclick="switchTab('overview')">Overview</button>
+  <button class="tb" data-tab="mealplan" onclick="switchTab('mealplan')">Meal Plan</button>
+  <button class="tb" data-tab="snacks" onclick="switchTab('snacks')">Snacks &amp; Sweets</button>
+  <button class="tb" data-tab="foodguide" onclick="switchTab('foodguide')">Food Guide</button>
+  <button class="tb" data-tab="strategy" onclick="switchTab('strategy')">Strategy</button>
+  <button class="tb" data-tab="shopping" onclick="switchTab('shopping')">Shopping</button>
+  <button class="tb" data-tab="supplements" onclick="switchTab('supplements')">Supplements</button>
+</nav>
+
+<div class="panels">
+  <div class="panel on" id="panel-overview"></div>
+  <div class="panel" id="panel-mealplan"></div>
+  <div class="panel" id="panel-snacks"></div>
+  <div class="panel" id="panel-foodguide"></div>
+  <div class="panel" id="panel-strategy"></div>
+  <div class="panel" id="panel-shopping"></div>
+  <div class="panel" id="panel-supplements"></div>
+</div>
+
+<script>
+/* ─── DATA ─────────────────────────────────────────── */
+const MP=[
+{id:"mon",short:"MON",emoji:"🌿",title:"Monday — Sattvic Fasting Day",tag:"Fasting",tc:"background:#EDE9FE;color:#6D28D9",note:"Spiritual sattvic fast · No eggs, dal, pulses, or legumes · Eating window: 9:30 AM – 8:30 PM",kcal:1110,protein:84,carbs:72,fat:28,fiber:16,meals:[
+  {time:"9:30 AM",type:"Breakfast",name:"Cold Coffee + Sweet Potato + Protein Paneer + Cucumber Salad",desc:"Cold coffee (black or with 50ml low-fat milk — no sugar). 100g boiled sweet potato. 100g Milky Mist Protein Paneer or homemade low-fat paneer — sliced or lightly pan-seared. Simple cucumber salad with lemon & black salt.",kcal:285,pro:22},
+  {time:"1:30 PM",type:"Lunch",name:"Skyr Smoothie + Apple + Almonds + Sabja Seeds",desc:"200g plain skyr blended with ½ tsp cinnamon, splash of cold water, optional ½ tsp vanilla. 1 medium apple on the side. 10 almonds. 1 tbsp sabja seeds soaked in water for 10 min — stir in or serve alongside.",kcal:325,pro:27},
+  {time:"5:00 PM",type:"Snack",name:"Peanut Makhana Chaat",desc:"20g dry-roasted makhana + 15g roasted peanuts + diced cucumber + cherry tomatoes + chaat masala + lemon juice + black salt. Toss together and serve immediately. Crunchy, satisfying, fully sattvic-compatible.",kcal:140,pro:5},
+  {time:"8:00 PM",type:"Dinner",name:"Rajgira Roti + Gobi Sabzi + Protein Paneer Bhurji",desc:"2 rajgira (amaranth) rotis. Gobi sabzi: 200g cauliflower with cumin, ginger, turmeric & 1 tsp ghee. Protein paneer bhurji: 100g Milky Mist Protein Paneer scrambled with tomato, onion, green chilli, cumin & turmeric.",kcal:480,pro:35}
+]},
+{id:"tue",short:"TUE",emoji:"💪",title:"Tuesday — Dal + Chilla Power Day",tag:"Indian",tc:"background:#FFEDD5;color:#C2410C",note:"No eggs today · Besan / moong chilla rotation · Batch-cook dal & paneer bhurji ahead",kcal:1585,protein:122,carbs:78,fat:38,fiber:24,meals:[
+  {time:"9:30 AM",type:"Breakfast",name:"Besan Chilla with Paneer Stuffing (or Moong Dal Chilla)",desc:"Rotation: 2 chillas made with 50g besan OR 60g soaked yellow moong dal batter. Season with grated ginger, green chilli, cumin, turmeric & ajwain. Stuff with 100g crumbled paneer + coriander + green chilli. Cook on non-stick pan with ½ tsp ghee each side. Green chutney + black coffee or green tea.",kcal:345,pro:28},
+  {time:"12:00 PM",type:"Mini Snack",name:"Skyr + Almonds",desc:"150g plain skyr with ½ tsp cinnamon & 8 almonds. Cold, quick, high-protein bridge to lunch.",kcal:160,pro:18},
+  {time:"1:30 PM",type:"Lunch",name:"Masoor Dal + Cauliflower Rice + Salad + Curd",desc:"Masoor dal (60g dry) with lauki (200g), ginger, garlic & turmeric. Serve over 200g cauliflower rice (grated cauliflower sautéed in 1 tsp ghee, 3–4 min). Occasionally swap for 30g samak rice or quinoa. Large salad + 150g homemade curd.",kcal:470,pro:28},
+  {time:"5:00 PM",type:"Snack",name:"Peanut Makhana Chaat",desc:"20g roasted makhana + 15g roasted peanuts + diced cucumber + cherry tomatoes + chaat masala + lemon + black salt. Light, crunchy — a snack, not a meal.",kcal:135,pro:6},
+  {time:"8:00 PM",type:"Dinner",name:"Paneer Bhurji + Sautéed Vegetables + Keto Roti",desc:"175g paneer bhurji: crumbled paneer scrambled with cumin seeds, onion, tomato, capsicum, green chilli, turmeric & coriander in 1 tsp ghee. Sautéed vegetables: 200g mixed broccoli, mushrooms & bell peppers in 1 tsp olive oil + garlic + herbs. 1–2 keto rotis (almond/coconut flour + psyllium husk, ~4g net carbs each). Warm, satisfying.",kcal:475,pro:42}
+]},
+{id:"wed",short:"WED",emoji:"🫒",title:"Wednesday — Mediterranean Twist",tag:"International",tc:"background:#E0F2FE;color:#0369A1",note:"Egg white breakfast · Anti-inflammatory tofu stir-fry dinner · High omega-3 day",kcal:1550,protein:124,carbs:68,fat:46,fiber:24,meals:[
+  {time:"9:30 AM",type:"Breakfast",name:"Egg White Omelette + Half Cheese + Sautéed Vegetables",desc:"4 egg whites with turmeric & black salt. Add baby spinach, button mushrooms & diced capsicum. Top with 30g grated low-fat cheese or 50g crumbled paneer. 1 tsp ghee. Black coffee. Alternative: 2–3 boiled eggs + 50g paneer slab + cucumber slices.",kcal:295,pro:28},
+  {time:"12:00 PM",type:"Mini Snack",name:"Skyr + Berries",desc:"150g plain skyr + ¼ cup mixed berries + ½ tsp cinnamon. Antioxidant-rich, polyphenol-loaded.",kcal:140,pro:17},
+  {time:"1:30 PM",type:"Lunch",name:"Chickpea Bowl + Cucumber Raita + Olive Oil",desc:"150g cooked chickpeas tossed with roasted cumin, lemon, coriander, diced cucumber & cherry tomatoes. 150g homemade curd or Greek yogurt with lemon & fresh mint. Drizzle 1 tsp EVOO. ¼ avocado if available.",kcal:465,pro:24},
+  {time:"5:00 PM",type:"Snack",name:"Crispy Air-Fried Soya Chunks",desc:"40g dry soya — boiled, squeezed completely dry, coated with psyllium husk + nutritional yeast + chaat masala + chilli (grain-free coating, no flour). Air-fried at 200°C for 15–18 min. See Snacks tab for full recipe.",kcal:155,pro:20},
+  {time:"8:00 PM",type:"Dinner",name:"Sesame Tofu Stir-Fry + Edamame + Cauliflower Rice",desc:"250g firm tofu marinated in tamari + sesame oil + ginger + garlic for 15 min, then pan-fried until crispy. Add broccoli, bok choy, bell peppers & mushrooms. Toss in tamari-sesame sauce. Add 50g edamame. Top with sesame seeds. Serve over 200g cauliflower rice.",kcal:495,pro:35}
+]},
+{id:"thu",short:"THU",emoji:"🍛",title:"Thursday — Cozy Indian Day",tag:"Indian",tc:"background:#FFEDD5;color:#C2410C",note:"Maximum anti-inflammatory spices · Air-fryer tikka dinner · Warm & comforting throughout",kcal:1545,protein:126,carbs:70,fat:38,fiber:25,meals:[
+  {time:"9:30 AM",type:"Breakfast",name:"Moong Dal Chilla + Homemade Curd",desc:"2 moong dal chillas (70g soaked yellow moong blended to a smooth batter, seasoned with grated ginger, green chilli, cumin & turmeric). Optionally stuff with 50g paneer crumble + herbs. Cook on non-stick pan with ½ tsp ghee. Green chutney + 150g homemade curd.",kcal:310,pro:22},
+  {time:"12:00 PM",type:"Mini Snack",name:"Skyr + Cinnamon",desc:"150g plain skyr + ½ tsp cinnamon + 5 almonds. Fast, no-fuss, anti-inflammatory protein hit.",kcal:145,pro:17},
+  {time:"1:30 PM",type:"Lunch",name:"Rajma + Large Salad + Homemade Curd",desc:"60g dry rajma pressure-cooked in spiced tomato-ginger-garlic base. Large salad: cucumber, tomato, onion & coriander with lemon & black salt. 150g homemade curd.",kcal:430,pro:28},
+  {time:"5:00 PM",type:"Snack",name:"Paneer + Corn Salad + Yogurt Dressing",desc:"100g low-fat paneer cubed or crumbled. Optional: 30g sweet corn (occasional — skip on stricter days). Toss with cucumber, cherry tomatoes, red onion & mint. Dressing: 3 tbsp thick curd + lemon + chaat masala + cumin powder + black salt.",kcal:195,pro:18},
+  {time:"8:00 PM",type:"Dinner",name:"Tandoori Cauliflower + Paneer Tikka + Sautéed Peppers",desc:"Tandoori cauliflower: 300g florets marinated in thick curd + turmeric + red chilli + cumin + garam masala + lemon + ginger-garlic paste. Air-fry at 200°C for 20–22 min until edges are charred. Paneer tikka: 125g paneer in same marinade, air-fry alongside. Serve with sautéed bell peppers & onion + green chutney.",kcal:465,pro:41}
+]},
+{id:"fri",short:"FRI",emoji:"🥗",title:"Friday — High-Protein Bowl Day",tag:"Fusion",tc:"background:#ECFDF5;color:#065F46",note:"Egg whites + paneer combo · Warm dal + rajgira dinner · Clean end to the work week",kcal:1560,protein:125,carbs:70,fat:48,fiber:22,meals:[
+  {time:"9:30 AM",type:"Breakfast",name:"Egg White Omelette + Half Cheese + Veggies",desc:"4 egg whites with turmeric & black salt. Add diced capsicum, baby spinach or sliced mushrooms. Top with 30g grated low-fat cheese or 50g paneer crumble. 1 tsp ghee. Black coffee. Alternative: 2 boiled eggs + cucumber + black salt + small paneer cube — zero cooking.",kcal:275,pro:26},
+  {time:"12:00 PM",type:"Mini Snack",name:"Skyr + Cinnamon",desc:"150g plain skyr with ½ tsp cinnamon & 5 almonds.",kcal:145,pro:17},
+  {time:"1:30 PM",type:"Lunch",name:"Grilled Paneer Bowl + Roasted Vegetables + Skyr Dip",desc:"125g grilled Milky Mist Protein Paneer. Roasted broccoli & zucchini (200g total) with olive oil + Italian herbs at 200°C, 20 min. Mixed greens + cherry tomatoes + sesame seeds. Skyr dip: 100g plain skyr + lemon juice + fresh mint + cumin — thick, creamy, tangy.",kcal:480,pro:38},
+  {time:"5:00 PM",type:"Snack",name:"Peanut Makhana Chaat",desc:"20g roasted makhana + 15g roasted peanuts + diced cucumber + tomato + chaat masala + lemon. Quick, crunchy, light enough not to spoil dinner.",kcal:135,pro:6},
+  {time:"8:00 PM",type:"Dinner",name:"Dal + Sabzi + Rajgira Roti",desc:"Warm yellow moong dal (60g dry) tempered with cumin, garlic, tomato & 1 tsp ghee. Sabzi: 200g french beans + spinach sautéed with mustard seeds, curry leaves & turmeric. 2 rajgira rotis — or 1–2 keto rotis for lower carbs. Warm, comforting, grain-minimal.",kcal:525,pro:38}
+]},
+{id:"sat",short:"SAT",emoji:"🌍",title:"Saturday — Global Flavors Day",tag:"International",tc:"background:#E0F2FE;color:#0369A1",note:"Flexible weekend day · Warm soup dinner if staying in · Dining out guide applies",kcal:1535,protein:122,carbs:74,fat:44,fiber:22,meals:[
+  {time:"9:30 AM",type:"Breakfast",name:"Besan Chilla + Yogurt Bowl (or Boiled Eggs Option)",desc:"2 crispy besan chillas (50g besan + onion + tomato + green chilli + cumin + ajwain). Serve with 100g thick Greek yogurt or skyr mixed with cucumber & fresh mint. Or swap entirely: 3 boiled eggs + ½ avocado + cucumber slices + black salt. Eat whichever you feel like.",kcal:310,pro:26},
+  {time:"12:00 PM",type:"Mini Snack",name:"Skyr + Berries",desc:"150g plain skyr or homemade curd with ¼ cup mixed berries & ½ tsp cinnamon.",kcal:120,pro:16},
+  {time:"1:30 PM",type:"Lunch",name:"Mexican Bean Bowl + Salad + Homemade Curd",desc:"100g black beans + 100g grilled paneer or tofu + ¼ avocado guacamole + tomato salsa + shredded lettuce + cucumber. 150g homemade curd on side. No tortillas.",kcal:470,pro:32},
+  {time:"5:00 PM",type:"Snack",name:"Almonds + Pumpkin Seeds",desc:"20g almonds + 10g pumpkin seeds measured into a small bowl. Never eat directly from the bag.",kcal:155,pro:7},
+  {time:"8:00 PM",type:"Dinner",name:"Warm Soup + Paneer / Tofu 🍽️ (or Dining Out)",desc:"Staying in: Warm tomato-lentil or palak-mushroom soup (300ml) + 125g grilled or air-fried paneer tikka or crispy tofu (marinate in Indian spices + lemon, air-fry at 200°C until charred). Going out: paneer tikka (150g grilled) + 1 small dal + large salad. Avoid creamy gravies, naan, biryani & desserts.",kcal:480,pro:41}
+]},
+{id:"sun",short:"SUN",emoji:"🌸",title:"Sunday — Prep & Replenish Day",tag:"Prep Day",tc:"background:#FDF2F8;color:#BE185D",note:"Batch-cook for the full week today · Nourishing warm meals · Anti-inflammatory reset day",kcal:1600,protein:124,carbs:88,fat:42,fiber:28,meals:[
+  {time:"9:30 AM",type:"Breakfast",name:"Shakshuka",desc:"3 eggs poached in spiced tomato-capsicum-spinach-onion sauce (1 tsp ghee). A pinch of smoked paprika for depth. Fresh coriander. 100g homemade curd on the side.",kcal:310,pro:23},
+  {time:"12:00 PM",type:"Mini Snack",name:"Sattu Sharbat",desc:"30g sattu in 300ml water with lemon, roasted cumin, rock salt & 1 tsp soaked sabja seeds.",kcal:120,pro:7},
+  {time:"1:30 PM",type:"Lunch",name:"Dal Tadka + Baingan Bharta + Paneer + Keto/Rajgira Roti",desc:"Mixed dal (60g masoor + moong) with cumin-garlic tadka (1 tsp ghee). Baingan bharta (200g roasted eggplant). 75g low-fat paneer bhurji or sliced. 1–2 keto rotis for low-carb, or rajgira rotis for a traditional feel. Large green salad with lemon dressing.",kcal:565,pro:38},
+  {time:"5:00 PM",type:"Snack",name:"Skyr + Almonds",desc:"150g plain skyr with ½ tsp cinnamon & 6 almonds.",kcal:145,pro:18},
+  {time:"8:00 PM",type:"Dinner",name:"Beetroot Salad + Sautéed Beans + Paneer + Sesame",desc:"Warm bowl: 200g french beans + 150g chickpeas, cooked in 1 tsp olive oil + mustard seeds + sesame seeds + turmeric until slightly crispy. Top with 150g paneer cubed and lightly seared until golden. Beetroot: 100g grated beetroot dressed with thick curd + roasted cumin + black salt + coriander. Finish with sesame seeds + lemon.",kcal:460,pro:38},
+  {time:"9:30 PM",type:"Optional",name:"Golden Milk 🌙",desc:"150ml low-fat milk + ½ tsp turmeric + cinnamon + cardamom. No sugar. Anti-inflammatory wind-down ritual.",kcal:60,pro:5}
+]}
+];
+
+const SNACKS=[
+  {n:"Peanut Makhana Chaat",d:"20g makhana + 15g peanuts + cucumber + tomato + chaat masala + lemon + black salt. Grain-free, crunchy.",k:135,p:6},
+  {n:"Skyr with Cinnamon",d:"200g plain skyr + ½ tsp cinnamon. Thick, cold, deeply satisfying.",k:130,p:22},
+  {n:"Paneer + Corn Salad + Yogurt Dressing",d:"100g paneer + optional 30g corn + cucumber + tomato + mint. Dressing: 3 tbsp curd + lemon + chaat masala.",k:195,p:18},
+  {n:"Crispy Air-Fried Soya Chunks",d:"50g dry soya, grain-free coating (psyllium husk + nutritional yeast). Air-fried at 200°C. Full recipe in this tab.",k:130,p:22},
+  {n:"2 Boiled Eggs",d:"Hard-boiled with black salt or chaat masala. Portable, zero prep, complete protein.",k:140,p:12},
+  {n:"Edamame",d:"100g boiled edamame + sea salt + chilli flakes. Complete protein. Batch-cook and keep in the fridge.",k:120,p:11},
+  {n:"Paneer Chaat Cubes",d:"75g low-fat paneer + cucumber + chaat masala + lemon. No cooking.",k:140,p:14},
+  {n:"Greek Yogurt Raita Bowl",d:"150g Greek yogurt + diced cucumber + mint + roasted cumin + black salt. Probiotic-rich.",k:115,p:12},
+  {n:"Skyr + Berries",d:"150g plain skyr + ¼ cup mixed berries. Under 5 minutes.",k:105,p:16},
+  {n:"Soya Chaat Bowl",d:"40g boiled soya chunks + cucumber + tomato + onion + chaat masala + lemon.",k:145,p:18},
+  {n:"Mini Paneer Bhurji",d:"75g paneer scrambled with turmeric, cumin & chilli. Standalone snack, no bread needed.",k:140,p:14},
+  {n:"Hummus + Veggie Sticks",d:"3 tbsp hummus + celery, cucumber & bell pepper sticks.",k:120,p:5},
+  {n:"Broccoli Kebab (3 pieces)",d:"200g broccoli with besan batter + psyllium husk + spices, air-fried. Great with green chutney.",k:135,p:10},
+  {n:"Roasted Soya Nuts",d:"30g dry-roasted soya chunks. Crispy, portable, protein-packed.",k:130,p:13},
+  {n:"Makhana + Sattu Combo",d:"20g roasted makhana + 20g sattu in water with lemon & sabja seeds.",k:145,p:9}
+];
+const SWEETS=[
+  {n:"Skyr with Cinnamon & Berries",d:"200g skyr + berries + cinnamon. Creamy and cold — works any phase."},
+  {n:"Dark Chocolate (1–2 squares)",d:"10–15g of 70%+ cocoa after a protein-rich meal. From Week 3 only."},
+  {n:"Chia Seed Pudding",d:"3 tbsp chia + 200ml almond milk + vanilla + stevia. Make the night before."},
+  {n:"Protein Cocoa Mousse",d:"150g skyr + 1 tbsp dark cocoa + stevia. Blend until smooth and glossy."},
+  {n:"Baked Cinnamon Apple",d:"1 small apple + cinnamon + nutmeg. Bake 15 min. Natural caramelised sweetness."},
+  {n:"Frozen Yogurt Bark",d:"Spread skyr on parchment + berries + crushed nuts. Freeze 2 hrs, break into pieces."},
+  {n:"Golden Milk Latte",d:"Warm low-fat milk + turmeric + cinnamon + cardamom. No sugar. Anti-inflammatory."},
+  {n:"Date + Almond Butter Bite",d:"1–2 Medjool dates stuffed with ½ tsp almond butter. Max 2/day — Week 3 only."},
+  {n:"Coconut Chia Pudding",d:"2 tbsp chia + 150ml light coconut milk + cardamom. Rich and tropical."},
+  {n:"Cocoa-Dusted Makhana",d:"30g makhana + 1 tsp dark cocoa + cinnamon. Crunchy chocolate fix — Week 3."}
+];
+const EATING_OUT=[
+  {n:"Indian Restaurant",ok:"Paneer tikka (grilled). Any dal. Raita or salad. 1 small roti if hungry.",av:"Butter naan, biryani, creamy gravies, fried starters, desserts"},
+  {n:"Salad Bar / Café",ok:"Greens + chickpeas/paneer/tofu + lots of veg + olive oil & lemon dressing.",av:"Croutons, creamy dressings, excess cheese, sweetened dressings"},
+  {n:"Mediterranean / Middle Eastern",ok:"Greek salad + hummus + 2–3 falafel + tzatziki.",av:"Pita bread, rice pilaf, baklava"},
+  {n:"Pan-Asian / Chinese",ok:"Tofu stir-fry, clear soups, steamed dim sum. Low oil & sodium.",av:"Fried rice, lo mein, spring rolls, sweet sauces"},
+  {n:"Italian",ok:"Caprese salad + grilled vegetable platter.",av:"Pasta, pizza, risotto, tiramisu, garlic bread"},
+  {n:"South Indian",ok:"1 plain dosa or 2–3 idli with sambar and chutneys.",av:"Ghee masala dosa, sweet lassi, upma"},
+  {n:"Hotel Breakfast Buffet",ok:"Eggs (any style) + fresh fruit (small portion) + plain yogurt.",av:"Pastries, juices, fried items, sweetened cereals"},
+  {n:"Mexican / Tex-Mex Bowl",ok:"Bowl with beans + guac + salsa. No tortillas.",av:"Tortillas, rice, nachos, sour cream"},
+  {n:"Health Café / Smoothie Bar",ok:"Egg bowls, yogurt bowls. No added sugar. Ask for mods.",av:"Açaí bowls with granola, fruit juices, sweetened shakes"},
+  {n:"Street Food / Chaat",ok:"Boiled chickpea chaat, cucumber chaat, light on sweet chutney.",av:"Fried papdi, sev overload, sweet chutney excess, aloo-heavy items"}
+];
+const ADD_FOODS=[
+  {n:"Hemp Seeds",d:"Complete protein (all 9 amino acids) + omega-3s. Add 2 tbsp to yogurt, smoothies or salads."},
+  {n:"Tempeh",d:"Fermented soy — 19g protein/100g + gut-friendly probiotics. Use in stir-fries instead of tofu."},
+  {n:"Edamame",d:"Complete protein, high fiber. 100g boiled = 11g protein. Available frozen at most supermarkets."},
+  {n:"Nutritional Yeast",d:"Cheesy umami flavour, B12, ~14g protein per 30g. Sprinkle on eggs, salads, soups."},
+  {n:"Shirataki Noodles",d:"Near-zero calories, high glucomannan fiber. Use in stir-fries and soups."},
+  {n:"Sprouted Moong / Chana",d:"Sprouting increases protein bioavailability & reduces anti-nutrients. Sprout at home in 24–36 hrs."},
+  {n:"Ground Flaxseed",d:"Omega-3 ALA, soluble fiber, lignans. 1 tbsp daily in yogurt or smoothie."},
+  {n:"Psyllium Husk (Isabgol)",d:"Powerful soluble fiber. 1 tsp before meals reduces blood sugar spike & increases fullness."},
+  {n:"Apple Cider Vinegar",d:"1 tsp diluted in water before meals. Modest but real evidence for insulin sensitivity."},
+  {n:"Sabja Seeds (Sweet Basil)",d:"Swell in water, slow digestion. Add to sattu, skyr, smoothies for satiety."},
+  {n:"Milky Mist Protein Paneer",d:"Higher-protein paneer variant. Useful for fasting days & high-protein meals."},
+  {n:"Lupin Flour / Beans",d:"~40% protein. Use instead of besan in chillas for a protein boost."},
+  {n:"Moringa Powder",d:"1 tsp in warm water or smoothie. Powerfully anti-inflammatory, rich in iron, vitamin C & calcium."},
+  {n:"Amla (Indian Gooseberry)",d:"1 fresh amla or 1 tsp powder daily. 20× more vitamin C than orange. Reduces CRP & supports liver health."}
+];
+const LIMIT_FOODS=[
+  {i:"All wheat products",d:"Roti, bread, pasta, maida, biscuits — strictly exclude weeks 1–2"},
+  {i:"White rice & polished grains",d:"High GI. Use cauliflower rice, keto roti, rajgira, samak, or quinoa (occasionally) instead"},
+  {i:"High-sugar fruits",d:"Mango, banana, grapes, chikoo, lychee, jackfruit — too much fructose weeks 1–2"},
+  {i:"Potatoes & sweet potato in excess",d:"High starch. Small portions (75–100g) on fasting days or from Week 3 only"},
+  {i:"Corn (maize)",d:"Limit sweet corn to 30g max as an occasional snack add-on — not a daily staple"},
+  {i:"All added sugars",d:"Jaggery, honey, maple syrup — even 'natural' sugars spike insulin. Weeks 1–2: zero exceptions"},
+  {i:"Packaged snacks",d:"Namkeen, chips, farsan — ultra-processed, high in seed oils & sodium"},
+  {i:"Fruit juices",d:"Even 'no added sugar' = liquid fructose without fiber. Always eat whole fruit instead"},
+  {i:"Excess cooking oil",d:"Cap at 1–2 tsp per meal. Ghee and olive oil fine in small amounts"},
+  {i:"Dried fruits in excess",d:"Raisins, dates, figs are calorie-dense. Max 2 dates/day from Week 3"},
+  {i:"Full-fat dairy in large quantity",d:"Switch to low-fat paneer, skimmed milk, low-fat yogurt during this phase"},
+  {i:"Restaurant food more than 2×/week",d:"Unknown oil/butter content & large portions. Use the eating-out guide when you do"}
+];
+const HUNGER_TIPS=[
+  {i:"🥚",t:"Protein at Every Meal",d:"Aim for 30–40g protein per meal. Protein triggers satiety hormones (PYY, GLP-1) far more powerfully than carbs or fat."},
+  {i:"🥗",t:"Eat Vegetables First",d:"Begin every meal with salad or soup. Fiber swells in your stomach, slows gastric emptying, and significantly reduces meal-time hunger."},
+  {i:"💧",t:"Pre-Meal Water Protocol",d:"Drink 350–500ml water 15–20 minutes before each meal. Consistently reduces intake by 10–15% in studies."},
+  {i:"🥤",t:"Sattu Between Meals",d:"30g sattu + lemon + cumin + sabja in water = ~120 kcal, 7g protein, good fiber. Kills mild hunger for 2–3 hrs."},
+  {i:"🥦",t:"Volume Eating Strategy",d:"Fill half your plate with low-calorie, high-volume foods: cucumber, broccoli, spinach, mushrooms, cauliflower, french beans."},
+  {i:"🍽️",t:"Eat Slowly & Mindfully",d:"20 chews per bite. Satiety signals take 15–20 minutes to reach the brain. Eating slowly is the easiest way to reduce total intake."},
+  {i:"⏰",t:"Fixed Meal Times",d:"Eat at consistent times daily. Irregular eating disrupts ghrelin (hunger hormone) rhythms."},
+  {i:"😴",t:"Prioritise Sleep",d:"7–8 hours non-negotiable. Sleep deprivation raises ghrelin by ~15% and spikes cortisol — both drive fat storage, especially visceral."},
+  {i:"🧘",t:"Stress Management",d:"Chronic stress = chronic cortisol = visceral fat. Even 10 min of deep breathing, yoga or a walk daily has measurable metabolic effects."},
+  {i:"💊",t:"Work With Mounjaro, Not Against It",d:"Mounjaro suppresses appetite through GLP-1/GIP pathways. Structured, protein-rich eating amplifies its effectiveness dramatically."}
+];
+const MISTAKES=[
+  {s:"HIGH",t:"Not Hitting Protein Target",d:"Under-eating protein in a deficit = muscle loss + slowed metabolism + more hunger. 120–140g daily is non-negotiable."},
+  {s:"HIGH",t:"Eating Too Little Overall",d:"Going below 1,300 kcal triggers metabolic adaptation. Stay at 1,500–1,700 kcal."},
+  {s:"HIGH",t:"Skipping Resistance Training",d:"Without 3×/week resistance training, a calorie deficit causes significant muscle loss."},
+  {s:"MED",t:"Liquid Calories",d:"2–3 chai with milk & sugar = 200–400 invisible kcal. Switch to black coffee, green tea, herbal infusions."},
+  {s:"MED",t:"'Healthy' Snack Overconsumption",d:"Almonds, makhana, ghee are nutritious but calorie-dense. Always measure — never eat from the packet."},
+  {s:"MED",t:"Not Tracking for the First Month",d:"Most people underestimate intake by 30–50%. Track using MyFitnessPal or Cronometer for 3–4 weeks."},
+  {s:"MED",t:"Fruit Overconsumption",d:"In weeks 1–2, limit to 1–2 low-sugar fruits (berries, papaya, apple). Avoid mango, banana, grapes entirely."},
+  {s:"MED",t:"Eating Out Without a Plan",d:"Arrive fuelled with a small protein snack. Don't arrive starving — that's when poor choices happen."},
+  {s:"LOW",t:"Daily Weigh-Ins + Scale Panic",d:"Weight fluctuates 1–3 kg daily from water, sodium, hormones. Weigh weekly. Better: measure your waist monthly."},
+  {s:"LOW",t:"Ignoring Non-Scale Victories",d:"Energy, sleep, mood, reduced bloating, looser waistband — these matter as much as the scale number."}
+];
+const ANTI_FOODS=[
+  {i:"🟡",n:"Turmeric + Black Pepper",d:"Curcumin in turmeric is among the most studied anti-inflammatory compounds. Black pepper increases absorption by up to 2000%. Add to every dal, sabzi, egg dish, and even your skyr."},
+  {i:"🌿",n:"Ginger (Adrak)",d:"Gingerols and shogaols in ginger are potent anti-inflammatories. Use fresh in chutneys, teas, stir-fries, and dals. Particularly helpful for gut inflammation."},
+  {i:"🧄",n:"Garlic & Onion",d:"Allicin in garlic and quercetin in onion are both strongly anti-inflammatory. Crush garlic, let sit 5 min before cooking to activate allicin."},
+  {i:"🟢",n:"Omega-3 Rich Foods",d:"Ground flaxseed (1 tbsp daily), walnuts, hemp seeds, chia, and sabja seeds all provide ALA omega-3s. Add to skyr, smoothies, or sprinkle on salads."},
+  {i:"🥦",n:"Broccoli & Cauliflower",d:"Sulforaphane in cruciferous vegetables is one of the most powerful anti-inflammatory compounds known. Lightly stir-fry rather than boil to preserve it."},
+  {i:"🍄",n:"Mushrooms",d:"Beta-glucans in mushrooms modulate the immune system and reduce chronic inflammation. Shiitake has the strongest evidence. Use generously in omelettes, stir-fries, and soups."},
+  {i:"🫚",n:"Ghee & Olive Oil",d:"Ghee provides butyrate that feeds the gut lining and reduces gut inflammation. EVOO contains oleocanthal — a natural ibuprofen-like anti-inflammatory compound."},
+  {i:"🍵",n:"Green Tea",d:"EGCG in green tea is a powerful antioxidant and anti-inflammatory. 1–2 cups daily. Replace your mid-morning tea. Drink without milk for full benefit."},
+  {i:"🫐",n:"Berries",d:"Anthocyanins and polyphenols in berries reduce oxidative stress. Frozen berries are just as effective as fresh — and cheaper."},
+  {i:"🟤",n:"Cinnamon",d:"Reduces post-meal blood sugar spikes and has direct anti-inflammatory effects. Already in the plan — keep it in your skyr and coffee every day."},
+  {i:"❤️",n:"Beetroot",d:"Betalains in beetroot are potent anti-inflammatory pigments. Also excellent for blood flow and liver detox. Sunday's beetroot dinner is a great anti-inflammatory meal."},
+  {i:"🍃",n:"Methi & Curry Leaves",d:"Fenugreek has anti-inflammatory and blood sugar-stabilising properties. Curry leaves are rich in antioxidants. Use both in tadkas, sabzis, and morning water."}
+];
+const ANTI_HABITS=[
+  {i:"😴",n:"Sleep 7–8 Hours (Non-Negotiable)",d:"Sleep deprivation elevates CRP — a direct marker of inflammation. This is the single most impactful anti-inflammatory intervention. Protect sleep as if your health depends on it."},
+  {i:"☀️",n:"Morning Sunlight (10–15 min)",d:"Vitamin D deficiency is strongly linked to inflammation. Morning sun exposure for 10–15 min sets your circadian rhythm and normalises cortisol — both directly reduce inflammatory markers."},
+  {i:"🚶",n:"Post-Meal Walk (10 min)",d:"A 10-minute walk after lunch and dinner reduces blood sugar spikes by 15–30%, directly cutting glycation-driven inflammation. One of the highest-ROI habits — no gym needed."},
+  {i:"🧘",n:"Daily Stress Reduction",d:"Chronic stress = chronic cortisol = chronic inflammation. Even 10 minutes of 4-7-8 breathing, yoga nidra, or a gentle walk has measurable effects on cortisol and CRP levels."},
+  {i:"💧",n:"2.5–3L Water Daily",d:"Dehydration concentrates pro-inflammatory compounds in the blood. Plain water, jeera water, saunf water, and green tea all count."},
+  {i:"🦠",n:"Feed Your Gut Daily",d:"70% of your immune system lives in your gut. Daily curd or skyr provides live probiotics. Ground flaxseed and sabja provide prebiotic fiber. This is your gut's best daily medicine."}
+];
+const ANTI_REDUCE=[
+  {n:"Refined Sugar & Maida",w:"Spike blood sugar → glycation → AGEs — main drivers of cellular inflammation. This plan already eliminates both."},
+  {n:"Seed Oils (Sunflower, Canola, Refined Veg Oil)",w:"High in omega-6, which creates an inflammatory imbalance. Switch to ghee, olive oil, or small amounts of coconut oil instead."},
+  {n:"Ultra-Processed Foods",w:"Emulsifiers, artificial preservatives, and trans fats disrupt the gut microbiome and trigger low-grade systemic inflammation."},
+  {n:"Alcohol",w:"Even moderate alcohol disrupts gut barrier integrity (leaky gut) and elevates inflammatory markers."},
+  {n:"Chronic Sleep Deprivation",w:"One night of poor sleep measurably raises inflammatory cytokines — more anti-inflammatory than any supplement when fixed."},
+  {n:"Stress Eating & Irregular Meals",w:"Erratic eating patterns spike cortisol and insulin simultaneously — a particularly inflammatory combination."}
+];
+const ANTI_SUGGEST=[
+  {n:"Moringa Powder",d:"1 tsp in warm water or a smoothie. One of the most nutrient-dense plants on earth. Anti-inflammatory, rich in iron, vitamin C & calcium. Available at health stores."},
+  {n:"Amla (Indian Gooseberry)",d:"1 fresh amla or 1 tsp powder daily. 20× more vitamin C than orange. Reduces CRP and supports liver health. Deeply anti-inflammatory and very available across India."},
+  {n:"Triphala",d:"Ayurvedic blend of amla, bibhitaki & haritaki. ½ tsp in warm water at night. Gut-healing, anti-inflammatory, gentle detox support."},
+  {n:"Ashwagandha (KSM-66)",d:"300–600mg at night. Reduces cortisol and CRP, improves sleep quality and muscle recovery. Choose KSM-66 or Sensoril standardised extracts."},
+  {n:"Kanji (Fermented Carrot / Beetroot Water)",d:"Traditional North Indian probiotic drink. Outstanding for gut bacteria diversity. Very easy to make at home — deeply anti-inflammatory."}
+];
+const GROCERY={
+  "Proteins & Legumes 🥚":["Eggs — 12–15 for the week","Milky Mist Protein Paneer — 400–500g","Low-fat paneer — 700–800g total","Firm tofu — 400–500g","Homemade curd or low-fat Greek yogurt — 1.5 kg","Skyr — 500–600g","Dry soya chunks / granules — 250–300g","Sattu — 200–250g","Yellow moong dal — 350g (for chillas + dal)","Masoor dal (red lentils) — 200g","Rajma (kidney beans, dry) — 200g","Cooked chickpeas — 200g","Besan / chickpea flour — 300g (for chillas)","Black beans (canned or dry) — 200g","Edamame (frozen) — 200g"],
+  "Vegetables 🥦":["Spinach / palak — 500g","Broccoli — 400–500g","French beans — 200g","Cauliflower — 1 large head","Bell peppers (mixed colours) — 4–5","Button mushrooms or shiitake — 300g","Cucumber — 6–8","Cherry tomatoes — 300g","Regular tomatoes — 6–8","Lauki / bottle gourd — 2","Eggplant / baingan — 1–2","Beetroot — 2–3 medium","Bok choy or spring greens — 200g","Sweet potato — 200g (for Monday fast only)","Zucchini — 2–3","Onions, garlic, ginger","Fresh coriander + mint","Lemons / limes — 8–10","Sweet corn (frozen, optional) — 150g"],
+  "Fruits 🫐":["Mixed berries — fresh or frozen — 300–400g","Papaya — 1 small","Apples — 4–5","Avocados — 3–4"],
+  "Fats, Nuts & Seeds 🥑":["Almonds — 150g","Walnuts — 100g","Pumpkin seeds — 100g","Flaxseeds — 100g (grind fresh)","Hemp seeds — 100g","Chia seeds — 150g","Sabja seeds (sweet basil) — 100g","Almond butter (no added sugar) — 1 jar","Tahini — 1 small jar","Ghee — small jar","Extra-virgin olive oil","Sesame oil — small bottle","Roasted unsalted peanuts — 150g","White + black sesame seeds — 100g"],
+  "Pantry Essentials 🫙":["Makhana / fox nuts — 200g","Dry-roasted chana — 150g","Samak rice — 200g (occasional)","Quinoa — 150g (occasional)","Rajgira (amaranth) flour — 300g","Keto roti mix or almond flour — 200g","Psyllium husk / isabgol — 150g","Nutritional yeast — 50g","Unsweetened almond milk — 1–2 cartons","Dark chocolate 70%+ — 1 bar (Week 3+)","Apple cider vinegar — 1 bottle","Low-sodium tamari / soy sauce — 1 bottle","Stevia drops or erythritol — 1 pack"],
+  "Spices & Herbs 🌿":["Turmeric, cumin seeds + powder, coriander powder","Chaat masala, black salt (kala namak)","Red chilli powder, garam masala, smoked paprika","Cinnamon sticks + powder","Cardamom pods, nutmeg, ajwain","Fennel seeds (saunf) — 50g","Fenugreek seeds (methi dana) — 50g","Curry leaves (fresh or dried)","Mustard seeds (black)","Dried basil / Italian mixed herbs"]
+};
+const PREP_GUIDE=[
+  {s:"1",t:"Boil Eggs in Bulk",d:"Boil 6–8 eggs. Store in fridge unpeeled — good for 7 days. Quick grab-and-go protein for Wednesday, Friday, or Saturday breakfasts."},
+  {s:"2",t:"Cook Dal in Bulk",d:"Pressure-cook masoor + moong together (300g dry total). Divide into 3–4 containers. Refrigerate — good for 4–5 days. Covers Tuesday lunch, Friday dinner, Sunday lunch."},
+  {s:"3",t:"Cook & Crisp Soya Chunks",d:"Soak 150g dry soya in boiling water 15 min, squeeze completely dry. Divide: half for curry/keema, half air-fry for crispy snacks (psyllium husk + nutritional yeast coating, 200°C, 15 min). Store separately, 3 days airtight."},
+  {s:"4",t:"Roast Makhana & Peanuts",d:"Dry-roast 200g makhana 8–10 min. Separately roast 150g peanuts in a dry pan. Both ready for peanut makhana chaat all week. Store airtight."},
+  {s:"5",t:"Chop & Store Vegetables",d:"Chop bell peppers, broccoli, mushrooms, cucumber, french beans. Store in separate containers. Lasts 4–5 days. Pre-cut cauliflower into florets for stir-fry + Tuesday cauliflower rice."},
+  {s:"6",t:"Make Chia Pudding",d:"Mix 3 tbsp chia + 200ml almond milk + vanilla. Fill 2–3 jars for mid-week snacks. Refrigerate overnight."},
+  {s:"7",t:"Prepare Sattu Blend & Sabja",d:"Mix 200g sattu with 1 tsp cumin powder + ½ tsp black salt + ½ tsp amchur. Store in a jar. Soak 2 tbsp sabja seeds in 1 cup water — refrigerate up to 3 days."},
+  {s:"8",t:"Marinate Paneer + Cauliflower",d:"Cube 250g paneer and cut 300g cauliflower into florets. Marinate together with yogurt + turmeric + red chilli + cumin + garam masala + lemon. Store 2 days — air-fry Thursday's tandoori cauliflower + paneer tikka in minutes."},
+  {s:"9",t:"Prep Chilla Batter",d:"Soak 100g yellow moong dal overnight. Next morning, drain and blend into a smooth batter with ginger, green chilli & cumin. Store in fridge — good for 2 days. Alternatively mix 100g besan with spices and water. Both ready for Tuesday and Thursday breakfasts."},
+  {s:"10",t:"Prep Keto Roti Dough",d:"Mix 50g almond flour + 1 tbsp psyllium husk + pinch salt + enough warm water to form a soft dough. Makes 4–6 rotis. Store wrapped in fridge for 3 days, or freeze individual balls."}
+];
+const PSEUDOGRAINS=[
+  {n:"Keto Roti",badge:"Lowest Carb ✓",bc:"background:#D1FAE5;color:#065F46",carbs:"~2–4g net carbs per roti",prot:"~3–4g per roti",fat:"Higher (almond/coconut flour base)",note:"The lowest-carb roti option by a large margin. Closest to a zero-grain meal while still having the roti experience.",when:"Best choice on most days — especially Tuesday and Friday dinner."},
+  {n:"Rajgira (Amaranth) Roti",badge:"Best for Fasting",bc:"background:#EDE9FE;color:#5B21B6",carbs:"~18–22g carbs per roti",prot:"~4g per roti",fat:"Low",note:"Complete protein, calcium & iron. Gluten-free. Nutrient-dense and culturally appropriate for sattvic fasting days.",when:"Monday fasting day, Friday dinner, Sunday lunch."},
+  {n:"Samak (Barnyard Millet)",badge:"Fasting Grain",bc:"background:#E0F2FE;color:#0369A1",carbs:"~35g carbs per 40g dry",prot:"~5g per 40g dry",fat:"Low",note:"Traditional Hindu fasting grain used as a rice substitute. Lower GI than white rice. Satisfying and easy to cook.",when:"Occasional use on Tuesday lunch (swap for cauliflower rice). Traditional fasting day rice alternative."},
+  {n:"Quinoa",badge:"Occasional Use",bc:"background:#FDF2F8;color:#9D174D",carbs:"~34g carbs per 50g dry",prot:"~7g per 50g dry",fat:"Low",note:"Complete protein — all 9 essential amino acids. A useful occasional swap for variety.",when:"Occasionally — swap for cauliflower rice at lunch. Not a daily staple during active fat loss."}
+];
+const CRISPY_SOYA={
+  desc:"Grain-free coating — no besan, no flour. Just psyllium husk and nutritional yeast. Higher protein than roasted chana. Extremely satisfying crunch.",
+  macros:"~130 kcal · ~22g protein per serving (50g dry soya)",
+  steps:[
+    {s:"1",d:"Add 50g dry soya chunks to boiling salted water. Cook 10 minutes until fully hydrated and soft."},
+    {s:"2",d:"Drain completely. Squeeze each chunk firmly between your palms — remove as much moisture as possible. This step is critical for crispiness. The drier, the better."},
+    {s:"3",d:"Toss the squeezed chunks with: ½ tsp psyllium husk + 1 tbsp nutritional yeast + ½ tsp chaat masala + ¼ tsp red chilli powder + pinch black salt. Both psyllium husk and nutritional yeast are grain-free — they create the crispy coating without any flour."},
+    {s:"4",d:"Air fry at 200°C for 15–18 minutes, shaking the basket halfway. OR bake at 200°C on a parchment-lined tray for 20–22 minutes, flipping halfway. They should feel hard and deeply golden."},
+    {s:"5",d:"Cool completely before storing. Keeps in an airtight jar for 2 days. Eat as-is, toss with cucumber + tomato + lemon for a chaat version, or use as a crunchy topping on soups and salads."}
+  ]
+};
+
+/* ─── STATE ─────────────────────────────────────────── */
+let curDay=0, openMeal=null;
+
+/* ─── HELPERS ─────────────────────────────────────────── */
+function pct(v,t){return Math.min(100,Math.round(v/t*100))+'%'}
+function ic(cls,name,desc){return`<div class="ic ${cls}"><div class="in">${name}</div><div class="id">${desc}</div></div>`}
+function snack(n,d,k,p,idx){return`<div class="snrow"><div class="sninfo"><div class="snn">${idx+1}. ${n}</div><div class="snd">${d}</div></div><div class="snm"><div class="snk">${k} kcal</div><div class="snp">${p}g prot</div></div></div>`}
+
+/* ─── OVERVIEW ─────────────────────────────────────────── */
+function renderOverview(){
+  document.getElementById('panel-overview').innerHTML=`
+<div class="stack">
+<div class="card">
+  <div class="ctitle">📊 Your Daily Targets</div>
+  <div class="t2">
+    <div class="tile big" style="background:#F5F3FF"><div class="tl">Calories</div><div class="tv tv-plum">1,500–1,700</div><div class="tsub">Mon fasting: ~1,100 kcal</div></div>
+    <div class="tile big" style="background:#FDF4FF"><div class="tl">Protein</div><div class="tv tv-fuch">120–140 g</div><div class="tsub">~1.8g / kg lean mass</div></div>
+    <div class="tile big" style="background:#F0FDF4" style="margin-top:10px"><div class="tl">Fiber</div><div class="tv tv-em">30–40 g</div><div class="tsub">From veg, seeds, legumes</div></div>
+    <div class="tile big" style="background:#F0F9FF;margin-top:10px"><div class="tl">Water</div><div class="tv tv-sky">2.5–3 L</div><div class="tsub">+ 1 glass before each meal</div></div>
+  </div>
+</div>
+<div class="card">
+  <div class="ctitle">🍭 Sugar & Chocolate Policy</div>
+  <div class="pol-strict">
+    <div class="pol-head" style="color:#BE123C">Weeks 1–2 — Strict Reset Phase</div>
+    <div class="pol-item">❌ No added sugar (jaggery, honey, maple syrup, coconut sugar)</div>
+    <div class="pol-item">❌ No dark chocolate</div>
+    <div class="pol-item">❌ No cheat meals</div>
+    <div class="pol-item">✅ Stevia / erythritol allowed — sparingly</div>
+    <div style="font-size:11px;color:var(--mid);margin-top:6px;line-height:1.5">Taste buds reset in 7–10 days. Insulin stabilises. Cravings reduce dramatically. This phase amplifies Mounjaro's effectiveness.</div>
+  </div>
+  <div class="pol-sust">
+    <div class="pol-head" style="color:#92400E">Week 3 Onwards — Sustainable Phase</div>
+    <div class="pol-item">✅ Dark chocolate: 10–15g max, 70%+ cocoa only</div>
+    <div class="pol-item">✅ Best timing: immediately after a protein-rich meal</div>
+    <div class="pol-item">✅ Benefits: magnesium, antioxidants, modest appetite suppression</div>
+    <div style="font-size:10.5px;color:var(--light);margin-top:4px">Good options: Lindt 70%+, Amul Bitter, Mason & Co, Pascati</div>
+  </div>
+</div>
+<div class="card">
+  <div class="ctitle">📈 Expected Results — Month 1</div>
+  ${[{l:"Total scale weight loss",v:"4–7 kg",n:"Incl. ~1–2 kg water/glycogen in week 1"},{l:"Pure fat loss",v:"2–4 kg",n:"Sustainable, muscle-preserving rate"},{l:"Waist circumference",v:"3–6 cm",n:"Visceral fat responds fast to low-grain eating"},{l:"Bloating & facial puffiness",v:"Week 1–2",n:"Cutting grains & sugar = rapid reduction"},{l:"Energy levels",v:"Improves: Week 2",n:"3–5 day initial adjustment is normal"}].map(r=>`
+  <div class="rrow"><div><div class="rl">${r.l}</div><div class="rn">${r.n}</div></div><div class="rv">${r.v}</div></div>`).join('')}
+  <div style="font-size:10.5px;color:var(--light);margin-top:6px;line-height:1.55">⚠️ Don't judge progress only by the scale. Take monthly photos + measure your waist weekly. Progress is not linear.</div>
+</div>
+</div>`;
+}
+
+/* ─── MEAL PLAN ─────────────────────────────────────────── */
+function renderMealPlan(){
+  const dp=MP.map((d,i)=>`<button class="daybtn${i===curDay?' on':''}" onclick="switchDay(${i})"><div class="de">${d.emoji}</div><div class="ds">${d.short}</div></button>`).join('');
+  document.getElementById('panel-mealplan').innerHTML=`<div class="stack"><div class="daypick">${dp}</div><div id="dayContent"></div></div>`;
+  renderDayContent();
+}
+function renderDayContent(){
+  const d=MP[curDay];
+  const pBars=[
+    {l:"Protein",v:d.protein,t:130,g:"linear-gradient(90deg,#E879F9,#C026D3)"},
+    {l:"Carbs",v:d.carbs,t:80,g:"linear-gradient(90deg,#FCD34D,#F59E0B)"},
+    {l:"Fat",v:d.fat,t:55,g:"linear-gradient(90deg,#38BDF8,#0284C7)"},
+    {l:"Fiber",v:d.fiber,t:35,g:"linear-gradient(90deg,#34D399,#059669)"}
+  ];
+  const meals=d.meals.map((m,i)=>`
+<div class="mcard">
+  <button class="mhdr" onclick="toggleMeal(${i})">
+    <div class="mtime"><div class="mtxt">${m.time}</div></div>
+    <div class="minfo"><div class="mtype">${m.type}</div><div class="mname">${m.name}</div></div>
+    <div class="mmacros"><div class="mkcal">${m.kcal} kcal</div><div class="mprot">${m.pro}g prot</div><div class="mchev" id="chev-${i}">▼</div></div>
+  </button>
+  <div class="mbody" id="mb-${i}">${m.desc}</div>
+</div>`).join('');
+  document.getElementById('dayContent').innerHTML=`
+<div class="card">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+    <div class="ctitle" style="margin-bottom:0;font-size:14px">${d.title}</div>
+    <span class="tag" style="${d.tc}">${d.tag}</span>
+  </div>
+  <div style="font-size:11px;color:var(--light);margin-bottom:12px;line-height:1.5">${d.note}</div>
+  <div class="t4">
+    <div class="tile" style="background:#F5F3FF"><div class="tl">kcal</div><div class="tv tv-plum">${d.kcal}</div></div>
+    <div class="tile" style="background:#FDF4FF"><div class="tl">protein</div><div class="tv tv-fuch">${d.protein}g</div></div>
+    <div class="tile" style="background:#FFFBEB"><div class="tl">carbs</div><div class="tv tv-amb">${d.carbs}g</div></div>
+    <div class="tile" style="background:#F0F9FF"><div class="tl">fat</div><div class="tv tv-sky">${d.fat}g</div></div>
+  </div>
+  ${pBars.map(b=>`<div class="prow"><div class="plbl">${b.l}</div><div class="ptrack"><div class="pfill" style="width:${pct(b.v,b.t)};background:${b.g}"></div></div><div class="pnums">${b.v}g/${b.t}g</div></div>`).join('')}
+</div>
+${meals}`;
+  openMeal=null;
+}
+function switchDay(i){
+  curDay=i;
+  document.querySelectorAll('.daybtn').forEach((b,j)=>b.classList.toggle('on',j===i));
+  renderDayContent();
+}
+function toggleMeal(i){
+  const body=document.getElementById('mb-'+i);
+  const chev=document.getElementById('chev-'+i);
+  const isOpen=body.style.display==='block';
+  MP[curDay].meals.forEach((_,j)=>{
+    const b=document.getElementById('mb-'+j);
+    const c=document.getElementById('chev-'+j);
+    if(b){b.style.display='none';}
+    if(c){c.textContent='▼';}
+  });
+  if(!isOpen){body.style.display='block';chev.textContent='▲';}
+}
+
+/* ─── SNACKS ─────────────────────────────────────────── */
+function renderSnacks(){
+  document.getElementById('panel-snacks').innerHTML=`
+<div class="stack">
+<div class="card">
+  <div class="ctitle">💪 High-Protein Snacks</div>
+  <div class="csub">All under 200 kcal. Choose 1–2 per day based on hunger and protein gaps.</div>
+  ${SNACKS.map((s,i)=>snack(s.n,s.d,s.k,s.p,i)).join('')}
+</div>
+<div class="card">
+  <div class="ctitle">🍢 Crispy Soya Chunks — Full Recipe (Grain-Free)</div>
+  <div class="csub">${CRISPY_SOYA.desc}</div>
+  <div style="font-size:11.5px;font-weight:700;color:var(--violet);margin-bottom:10px">${CRISPY_SOYA.macros}</div>
+  ${CRISPY_SOYA.steps.map(s=>`<div class="sstep"><div class="ssnum">${s.s}</div><div class="sstxt">${s.d}</div></div>`).join('')}
+</div>
+<div class="card">
+  <div class="ctitle">🍓 10 Sweet-Craving Alternatives</div>
+  <div class="csub">Satisfy your sweet tooth without derailing progress. Dark chocolate options from Week 3 only.</div>
+  ${SWEETS.map((s,i)=>ic('pk',`${i+1}. ${s.n}`,s.d)).join('')}
+</div>
+</div>`;
+}
+
+/* ─── FOOD GUIDE ─────────────────────────────────────────── */
+function renderFoodGuide(){
+  document.getElementById('panel-foodguide').innerHTML=`
+<div class="stack">
+<div class="card">
+  <div class="ctitle">🌾 Grain & Roti Guide</div>
+  <div class="csub">Choosing the right grain substitute makes a big difference for fat loss and blood sugar control.</div>
+  ${PSEUDOGRAINS.map(g=>`
+  <div class="gcard">
+    <div class="ghdr"><div class="gname">${g.n}</div><span class="tag" style="${g.bc}">${g.badge}</span></div>
+    <div class="gstats"><span>Carbs: ${g.carbs}</span><span>Protein: ${g.prot}</span></div>
+    <div class="gnote">${g.note}</div>
+    <div class="gwhen">📌 ${g.when}</div>
+  </div>`).join('')}
+</div>
+<div class="card">
+  <div class="ctitle">🍽️ 10 Eating-Out Options</div>
+  ${EATING_OUT.map((e,i)=>`<div class="ecard"><div class="en">${i+1}. ${e.n}</div><div class="eok">✅ ${e.ok}</div><div class="eav">❌ Avoid: ${e.av}</div></div>`).join('')}
+</div>
+<div class="card">
+  <div class="ctitle">➕ Foods Worth Adding</div>
+  <div class="csub">Evidence-based upgrades — all available in India.</div>
+  ${ADD_FOODS.map(f=>ic('em',f.n,f.d)).join('')}
+</div>
+<div class="card">
+  <div class="ctitle">⚠️ Foods to Limit — First 2 Weeks</div>
+  <div class="csub">These significantly impact insulin response, inflammation and fat storage.</div>
+  ${LIMIT_FOODS.map(f=>ic('ro',f.i,f.d)).join('')}
+</div>
+</div>`;
+}
+
+/* ─── STRATEGY ─────────────────────────────────────────── */
+function renderStrategy(){
+  const sevMap={HIGH:'sH',MED:'sM',LOW:'sL'};
+  const cardMap={HIGH:'scH',MED:'scM',LOW:'scL'};
+  document.getElementById('panel-strategy').innerHTML=`
+<div class="stack">
+<div class="card">
+  <div class="ctitle">🧠 10 Hunger Management Strategies</div>
+  ${HUNGER_TIPS.map(h=>`<div class="tip-card ic gy" style="border-radius:13px;padding:11px;margin-bottom:7px;background:#F5F3FF;border-color:#DDD6FE"><div class="in" style="color:#5B21B6">${h.i} ${h.t}</div><div class="id" style="margin-top:4px">${h.d}</div></div>`).join('')}
+</div>
+<div class="card">
+  <div class="ctitle">🚫 10 Common Mistakes to Avoid</div>
+  ${MISTAKES.map(m=>`<div class="ic ${cardMap[m.s]}" style="margin-bottom:8px"><div class="sev-row"><div class="in">${m.t}</div><span class="sbadge ${sevMap[m.s]}">${m.s}</span></div><div class="id">${m.d}</div></div>`).join('')}
+</div>
+<div class="card">
+  <div class="ctitle">🌿 Holistic Anti-Inflammation Plan</div>
+  <div class="csub" style="font-size:11.5px;line-height:1.6;margin-bottom:14px">Inflammation is at the root of most modern health struggles — stubborn weight gain, fatigue, skin issues, hormonal imbalance, gut problems. The foods in this plan are already powerful anti-inflammatory tools. These aren't restrictions — they're upgrades your body will feel within weeks.</div>
+  <div class="sechead" style="color:#065F46">✅ Anti-Inflammatory Foods — Eat More</div>
+  ${ANTI_FOODS.map(f=>ic('em',`${f.i} ${f.n}`,f.d)).join('')}
+  <div class="sechead" style="color:#5B21B6">🧘 Lifestyle Pillars</div>
+  ${ANTI_HABITS.map(h=>ic('vi',`${h.i} ${h.n}`,h.d)).join('')}
+  <div class="sechead" style="color:#BE123C">⚠️ Reduce These — Inflammatory Triggers</div>
+  ${ANTI_REDUCE.map(r=>ic('ro',r.n,r.w)).join('')}
+  <div class="sechead" style="color:#92400E">💡 Bonus Suggestions</div>
+  ${ANTI_SUGGEST.map(s=>ic('am',s.n,s.d)).join('')}
+</div>
+</div>`;
+}
+
+/* ─── SHOPPING ─────────────────────────────────────────── */
+function renderShopping(){
+  const glist=Object.entries(GROCERY).map(([cat,items])=>`
+<div class="gcat">${cat}</div>
+${items.map(item=>`<div class="gitem"><span class="gdot">·</span><span>${item}</span></div>`).join('')}`).join('');
+  document.getElementById('panel-shopping').innerHTML=`
+<div class="stack">
+<div class="card">
+  <div class="ctitle">🛒 Weekly Grocery List</div>
+  ${glist}
+</div>
+<div class="card">
+  <div class="ctitle">📦 Sunday Meal-Prep Guide</div>
+  <div class="csub">Invest 90–120 minutes every Sunday. It makes the entire week dramatically easier and more adherent.</div>
+  ${PREP_GUIDE.map(p=>`<div class="step"><div class="snum">${p.s}</div><div><div class="stit">${p.t}</div><div class="sdet">${p.d}</div></div></div>`).join('')}
+</div>
+<div class="gcrd">
+  <div class="ctitle">💡 Tracking Tip</div>
+  <div style="font-size:11.5px;color:var(--mid);line-height:1.6">Use <strong>MyFitnessPal</strong> or <strong>Cronometer</strong> for at least the first 3–4 weeks. Most people underestimate intake by 30–50%. <strong>Cronometer</strong> also tracks micronutrients (iron, B12, calcium, zinc) — especially useful for vegetarians.</div>
+</div>
+</div>`;
+}
+
+/* ─── SUPPLEMENTS ─────────────────────────────────────────── */
+function renderSupplements(){
+  document.getElementById('panel-supplements').innerHTML=`
+<div class="stack">
+<div class="card">
+  <div class="ctitle">☀️ Morning Supplements</div>
+  ${[{n:"Iron Supplement",d:"Take on an empty stomach or with vitamin C (lemon water enhances absorption). At least 1 hour before breakfast and before coffee or tea."},{n:"Vitamin B12",d:"Essential for vegetarians. Take in the morning with or after breakfast. Sublingual (under-tongue) forms absorb better."},{n:"Probiotic",d:"Take 20–30 minutes before breakfast or as directed. Supports gut health, reduces bloating & boosts immunity."}].map(s=>`<div class="supp supp-am"><div class="sn">${s.n}</div><div class="sd">${s.d}</div></div>`).join('')}
+</div>
+<div class="card">
+  <div class="ctitle">🌙 Night Supplement</div>
+  <div class="supp supp-ni"><div class="sn">Magnesium Glycinate</div><div class="sd">300–400mg, 30–60 minutes before bed. Supports deep sleep, muscle recovery, reduces cortisol & improves insulin sensitivity. Glycinate form is gentler on digestion than magnesium oxide.</div></div>
+</div>
+<div class="ic re">
+  <div class="in" style="color:#BE123C">⚠️ Critical: Iron Timing & Separation</div>
+  <div class="id" style="margin-top:4px">Iron absorption is severely reduced by coffee, tea, milk, yogurt, paneer, and all calcium-rich foods. Do NOT take your iron supplement within 2 hours of consuming any of these. The safest approach: take iron first thing in the morning, at least 1 hour before coffee or breakfast. Consult your doctor for the correct dose.</div>
+</div>
+<div class="card">
+  <div class="ctitle">🌿 Optional Morning Drinks</div>
+  <div class="csub">Pick 1–2 and do them consistently. Helpful for digestion, appetite regulation, and insulin sensitivity.</div>
+  ${[{n:"Jeera (Cumin) Water",d:"Boil 1 tsp cumin seeds in 2 cups water for 5 min. Strain and drink. Aids digestion, reduces bloating."},{n:"Saunf (Fennel) Water",d:"Soak 1 tsp fennel seeds in 1 glass of water overnight. Drink in the morning. Calming for digestion, reduces gas."},{n:"Cinnamon Water",d:"Steep ½ tsp cinnamon in hot water for 5 min. Evidence supports modest blood sugar regulation."},{n:"Apple Cider Vinegar Water",d:"1 tsp raw ACV (with 'the mother') in 250ml water. Modest but real evidence for insulin sensitivity support."},{n:"Methi (Fenugreek) Water",d:"Soak 1 tsp fenugreek seeds overnight. Drink first thing. Good evidence for blood sugar & insulin sensitivity."}].map(d=>ic('em',d.n,d.d)).join('')}
+</div>
+<div class="gcrd">
+  <div class="ctitle">💡 Supplement Timing at a Glance</div>
+  <div class="tm-row"><div class="tm-lbl" style="color:var(--amber)">AM:</div><div style="font-size:11px;color:var(--mid);line-height:1.55">Wake up → Iron (+ lemon water) → Wait 1 hr → Optional morning drink → Breakfast → B12 + Probiotic</div></div>
+  <div class="tm-row"><div class="tm-lbl" style="color:#3730A3">PM:</div><div style="font-size:11px;color:var(--mid)">30–60 min before bed → Magnesium Glycinate</div></div>
+  <div style="font-size:10.5px;color:var(--light);line-height:1.55;margin-top:4px">Keep iron strictly separated from all dairy, coffee, and calcium-rich foods. Consistency matters more than perfect timing — but separation is non-negotiable for iron.</div>
+</div>
+</div>`;
+}
+
+/* ─── TAB SWITCHING ─────────────────────────────────────────── */
+function switchTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('panel-'+id).classList.add('on');
+  document.querySelector(`[data-tab="${id}"]`).classList.add('on');
+  // Scroll tab into view
+  const btn=document.querySelector(`[data-tab="${id}"]`);
+  btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+/* ─── INIT ─────────────────────────────────────────── */
+renderOverview();
+renderMealPlan();
+renderSnacks();
+renderFoodGuide();
+renderStrategy();
+renderShopping();
+renderSupplements();
+</script>
+</body>
+</html>
