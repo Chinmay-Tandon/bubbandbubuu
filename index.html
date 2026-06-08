@@ -223,7 +223,7 @@ What word means endless?
 <h3>Puzzle 3</h3>
 <p>
 When was the date we first started talking?  
-(Format: DDMMYY)
+(Format: DDMMYYYY)
 </p>
 <input type="text" id="p3">
 <button onclick="checkP3()">Unlock</button>
@@ -245,7 +245,7 @@ What was that phrase after which I said
 <h3>Puzzle 5</h3>
 <p>
 When was the date when you became mine?  
-(The day you said yes to me – DDMMYY)
+(The day you said yes to me – DDMMYYYY)
 </p>
 <input type="text" id="p5">
 <button onclick="checkP5()">Unlock</button>
@@ -297,7 +297,7 @@ function checkP1(){
 }
 
 function checkP2(){
-    if(!solved.p2 && document.getElementById("p2").value.toLowerCase().trim() === "booboo"){
+    if(!solved.p2 && document.getElementById("p2").value.toLowerCase().trim() === "booboo" || document.getElementById("p2").value.toLowerCase().trim() === "bubuu"){
         document.getElementById("word2").innerHTML = "YOU";
         solved.p2 = true;
         showFinal();
@@ -379,7 +379,7 @@ function checkP5(){
     let answer = document.getElementById("p5").value.trim();
 
     if(!solved.p5 && answer === "03012026"){
-        document.getElementById("word5").innerHTML = "FOREVER";
+        document.getElementById("word5").innerHTML = "FOREVER?";
         solved.p5 = true;
         showFinal();
     } else {
